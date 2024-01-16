@@ -34,6 +34,30 @@ class LinkedList {
     tail() {
         return Object.values(this).find((node) => node.next === null);
     }
+    pop() {
+        if (this.headNode === null ) {
+            return error('Error: cannot pop from an empty list');
+        } else {
+            const poppedValue = this.tail().value;
+            delete this[poppedValue]
+            Object.values(this).find((node) => node.next === poppedValue).next = null;
+        }
+    }
+    at(index) {
+        return Object.values(this)[index];
+    }
+    contains(value) {
+        if (Object.values(this).some((node) => node.value === value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    find(value) {
+        const foundValue = Object.values(this).find((node) => node.value === value)
+        if (foundValue) { return foundValue }
+        else { return null }
+    }
 }
 
 const test = new LinkedList();
@@ -60,3 +84,12 @@ console.log(test)
 console.log(test.head())
 console.log(test.size())
 console.log(test.tail())
+
+console.log(test.pop(), test)
+
+console.log(test.at(1))
+
+console.log(test.contains('test 1'))
+console.log(test.contains('test 10'))
+
+console.log(test.find('test 23'))

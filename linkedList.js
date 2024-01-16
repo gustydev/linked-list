@@ -7,15 +7,24 @@ class Node {
 
 class LinkedList {
     constructor() {
-        this.head = null;
+        this.headNode = null;
     }
     prepend(value) {
-        if (this.head === null) {
-            this.head = new Node(value);
+        if (this.headNode === null) {
+            this.headNode = new Node(value);
         } else {
-            this[this.head.value] = new Node(this.head.value, this.head.next);
-            this.head = new Node(value, this.head.value);
+            this[this.headNode.value] = new Node(this.headNode.value, this.headNode.next);
+            this.headNode = new Node(value, this.headNode.value);
         }
+    }
+    head() {
+        return this.headNode;
+    }
+    size() {
+        return Object.keys(this).length;
+    }
+    tail() {
+        return Object.values(this).find((node) => node.next === null);
     }
 }
 
@@ -27,4 +36,6 @@ test.prepend('test 2')
 console.log(test)
 test.prepend('test 3')
 console.log(test)
-// {head: Node('hahaha', 1), 1: Node('hihihi', 2), 2: Node('hohoho', 3), tail: Node('huhuhu', null)}
+console.log(test.head())
+console.log(test.size())
+console.log(test.tail())

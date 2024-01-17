@@ -37,7 +37,10 @@ class LinkedList {
         return n;
     }
     tail() {
-        let currentNode = this.headNode.next;
+        if (this.headNode === null) {
+            return null;
+        }
+        let currentNode = this.headNode;
         while (currentNode.next !== null) {
             currentNode = currentNode.next;
         }
@@ -45,15 +48,17 @@ class LinkedList {
     }
     pop() {
         if (this.headNode === null ) {
-            return error('Error: cannot pop from an empty list');
+            throw Error('cannot pop from empty list');
         } else {
-            let currentNode = this.headNode.next;
-            while (currentNode.next !== null) {
-                currentNode = currentNode.next;
-                console.log(currentNode)
+            if (this.headNode === this.tail()) {
+                this.headNode = null;
+                return;
             }
-            
-            console.log(JSON.stringify(this))
+            let currentNode = this.headNode;
+            while (currentNode.next !== this.tail()) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = null;
         }
     }
     at(index) {
@@ -76,21 +81,21 @@ class LinkedList {
 const test = new LinkedList();
 console.log(test)
 
-test.prepend('test 1')
-test.prepend('test 2')
-test.prepend('test 3')
+test.prepend('test 1');
+test.prepend('test 2');
+test.prepend('test 3');
 
-test.append('test 4')
+test.append('test 4');
 test.append('test 5');
 test.append('test 6');
+
+console.log(test.pop())
 
 console.log(test)
 
 console.log(test.head())
 console.log(test.tail())
 console.log(test.size())
-
-console.log(test.pop())
 
 // console.log(test.head())
 // console.log(test.size())

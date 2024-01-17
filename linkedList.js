@@ -62,18 +62,31 @@ class LinkedList {
         }
     }
     at(index) {
-        return Object.values(this)[index];
+        if (index > this.size()) {
+            return null;
+        }
+        let currentNode = this.headNode;
+        for (let i = 0; i < index; i++) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
     }
     contains(value) {
-        if (Object.values(this).some((node) => node.value === value)) {
-            return true;
-        } else {
-            return false;
+        let currentNode = this.headNode;
+        while (currentNode.value !== value && currentNode.next !== null) {
+            currentNode = currentNode.next;
         }
+        if (currentNode.value === value) { return true }
+        else { return false }
     }
     find(value) {
-        const foundValue = Object.values(this).find((node) => node.value === value)
-        if (foundValue) { return foundValue }
+        let currentNode = this.headNode;
+        let n = 0;
+        while (currentNode.value !== value && currentNode.next !== null) {
+            currentNode = currentNode.next;
+            n++
+        }
+        if (currentNode.value === value) { return n }
         else { return null }
     }
 }
@@ -96,6 +109,15 @@ console.log(test)
 console.log(test.head())
 console.log(test.tail())
 console.log(test.size())
+
+console.log(test.at(4))
+console.log(test.at(5))
+
+console.log(test.contains('test 1'))
+console.log(test.contains('test 69420'))
+
+console.log(test.find('test 1'))
+console.log(test.find('test 69420'))
 
 // console.log(test.head())
 // console.log(test.size())

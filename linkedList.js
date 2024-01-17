@@ -13,34 +13,47 @@ class LinkedList {
         if (this.headNode === null) {
             this.headNode = new Node(value);
         } else {
-            this[this.headNode.value] = new Node(this.headNode.value, this.headNode.next);
-            this.headNode = new Node(value, this.headNode.value);
+            const oldHead = this.headNode;
+            this.headNode = new Node(value, new Node(oldHead.value, oldHead.next));
         }
     }
     append(value) {
         if (this.headNode === null) {
             this.headNode = new Node(value);
         } else {
-            this.tail().next = value;
-            this[value] = new Node(value);
+            this.tail().next = new Node(value);
         }
     }
     head() {
         return this.headNode;
     }
     size() {
-        return Object.keys(this).length;
+        let n = 0;
+        let currentNode = this.headNode;
+        while (currentNode !== null) {
+            currentNode = currentNode.next;
+            n++;
+        }
+        return n;
     }
     tail() {
-        return Object.values(this).find((node) => node.next === null);
+        let currentNode = this.headNode.next;
+        while (currentNode.next !== null) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
     }
     pop() {
         if (this.headNode === null ) {
             return error('Error: cannot pop from an empty list');
         } else {
-            const poppedValue = this.tail().value;
-            delete this[poppedValue]
-            Object.values(this).find((node) => node.next === poppedValue).next = null;
+            let currentNode = this.headNode.next;
+            while (currentNode.next !== null) {
+                currentNode = currentNode.next;
+                console.log(currentNode)
+            }
+            
+            console.log(JSON.stringify(this))
         }
     }
     at(index) {
@@ -64,32 +77,30 @@ const test = new LinkedList();
 console.log(test)
 
 test.prepend('test 1')
-console.log(test)
-
 test.prepend('test 2')
-console.log(test)
-
 test.prepend('test 3')
-console.log(test)
 
 test.append('test 4')
-console.log(test)
-
 test.append('test 5');
-console.log(test)
-
 test.append('test 6');
+
 console.log(test)
 
 console.log(test.head())
-console.log(test.size())
 console.log(test.tail())
+console.log(test.size())
 
-console.log(test.pop(), test)
+console.log(test.pop())
 
-console.log(test.at(1))
+// console.log(test.head())
+// console.log(test.size())
+// console.log(test.tail())
 
-console.log(test.contains('test 1'))
-console.log(test.contains('test 10'))
+// console.log(test.pop(), test)
 
-console.log(test.find('test 23'))
+// console.log(test.at(1))
+
+// console.log(test.contains('test 1'))
+// console.log(test.contains('test 10'))
+
+// console.log(test.find('test 23'))

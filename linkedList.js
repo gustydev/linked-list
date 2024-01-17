@@ -114,19 +114,21 @@ class LinkedList {
             currentNode.next = newNode;
         }
     }
+    removeAt(index) {
+        if (index === this.size()) {
+            this.pop();
+        } else {
+            const removedNode = this.at(index);
+            const nextNode = this.at(index + 1);
+            if (index === 0) {
+                this.headNode = nextNode;
+            } else {
+                let currentNode = this.headNode;
+                while (currentNode.next !== removedNode) {
+                    currentNode = currentNode.next;
+                }
+                currentNode.next = nextNode;
+            }
+        }
+    }
 }
-
-const test = new LinkedList();
-console.log(test)
-
-test.prepend('test 1');
-test.prepend('test 2');
-test.prepend('test 3');
-
-test.append('test 4');
-test.append('test 5');
-test.append('test 6');
-
-console.log(test.toString())
-console.log(test.insertAt('penus', 2))
-console.log(test.toString())

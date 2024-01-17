@@ -99,6 +99,21 @@ class LinkedList {
         string += `null`
         return string;
     }
+    insertAt(value, index) {
+        if (index === 0) {
+            this.prepend(value);
+        } else if (index === this.size()) {
+            this.append(value);
+        } else {
+            const replacedNode = this.at(index);
+            const newNode = new Node(value, replacedNode);
+            let currentNode = this.headNode;
+            while (currentNode.next !== replacedNode) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = newNode;
+        }
+    }
 }
 
 const test = new LinkedList();
@@ -112,21 +127,6 @@ test.append('test 4');
 test.append('test 5');
 test.append('test 6');
 
-console.log(test.pop())
-
-console.log(test)
-
-console.log(test.head())
-console.log(test.tail())
-console.log(test.size())
-
-console.log(test.at(4))
-console.log(test.at(5))
-
-console.log(test.contains('test 1'))
-console.log(test.contains('test 69420'))
-
-console.log(test.find('test 1'))
-console.log(test.find('test 69420'))
-
+console.log(test.toString())
+console.log(test.insertAt('penus', 2))
 console.log(test.toString())

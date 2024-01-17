@@ -89,6 +89,16 @@ class LinkedList {
         if (currentNode.value === value) { return n }
         else { return null }
     }
+    toString() {
+        let string = ``;
+        let currentNode = this.headNode;
+        while (currentNode !== null) {
+            string += `( ${currentNode.value} ) -> `
+            currentNode = currentNode.next;
+        }
+        string += `null`
+        return string;
+    }
 }
 
 const test = new LinkedList();
@@ -119,15 +129,4 @@ console.log(test.contains('test 69420'))
 console.log(test.find('test 1'))
 console.log(test.find('test 69420'))
 
-// console.log(test.head())
-// console.log(test.size())
-// console.log(test.tail())
-
-// console.log(test.pop(), test)
-
-// console.log(test.at(1))
-
-// console.log(test.contains('test 1'))
-// console.log(test.contains('test 10'))
-
-// console.log(test.find('test 23'))
+console.log(test.toString())
